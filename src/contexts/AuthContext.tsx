@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-type Role = "student" | "enterprise" | null;
+type Role = "student" | "enterprise" | "club" | null;
 
 interface AuthState {
   isAuthenticated: boolean;
@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const determineRole = (email: string): Role => {
     if (email.toLowerCase() === "etudiant@gmail.com") return "student";
+    if (email.toLowerCase() === "club@gmail.com") return "club";
     return "enterprise";
   };
 

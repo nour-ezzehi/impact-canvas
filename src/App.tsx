@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import AuthPage from "./pages/AuthPage";
 import StudentDashboard from "./pages/StudentDashboard";
+import ClubHomeDashboard from "./pages/ClubHomeDashboard";
 import EnterpriseDashboard from "./pages/EnterpriseDashboard";
 import MarketplacePage from "./pages/MarketplacePage";
 import ProjectsPage from "./pages/ProjectsPage";
@@ -18,6 +19,7 @@ const queryClient = new QueryClient();
 const DashboardRouter = () => {
   const { role } = useAuth();
   if (role === "student") return <StudentDashboard />;
+  if (role === "club") return <ClubHomeDashboard />;
   return <EnterpriseDashboard />;
 };
 

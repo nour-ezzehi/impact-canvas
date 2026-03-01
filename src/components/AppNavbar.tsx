@@ -15,10 +15,16 @@ const navItemsEnterprise = [
   { label: "Marketplace", icon: TrendingUp, path: "/marketplace" },
 ];
 
+const navItemsClub = [
+  { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
+  { label: "Projets", icon: Briefcase, path: "/projects" },
+  { label: "Marketplace", icon: TrendingUp, path: "/marketplace" },
+];
+
 const AppNavbar = () => {
   const { role, logout, email } = useAuth();
   const location = useLocation();
-  const navItems = role === "student" ? navItemsStudent : navItemsEnterprise;
+  const navItems = role === "student" ? navItemsStudent : role === "club" ? navItemsClub : navItemsEnterprise;
 
   return (
     <motion.nav
@@ -57,7 +63,7 @@ const AppNavbar = () => {
         <div className="flex items-center gap-3">
           <span className="hidden md:block text-sm text-muted-foreground">{email}</span>
           <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium capitalize">
-            {role === "student" ? "Étudiant" : "Entreprise"}
+            {role === "student" ? "Étudiant" : role === "club" ? "Club" : "Entreprise"}
           </span>
           <button
             onClick={logout}
