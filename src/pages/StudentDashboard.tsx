@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { currentStudent } from "@/data/fakeData";
+import { currentStudent, clubs } from "@/data/fakeData";
+import { Link } from "react-router-dom";
 import ScoreRing from "@/components/ScoreRing";
 import AppNavbar from "@/components/AppNavbar";
 import {
   Award, Briefcase, Users, DollarSign, Calendar, CheckCircle2, Clock,
-  Star, TrendingUp, Target, Sparkles
+  Star, TrendingUp, Target, Sparkles, ArrowRight
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
@@ -81,6 +82,32 @@ const StudentDashboard = () => {
                 <span key={skill} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
                   {skill}
                 </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Clubs */}
+          <motion.div variants={item}>
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Users className="w-5 h-5 text-accent" />
+              Mes Clubs
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {clubs.map((c) => (
+                <Link key={c.id} to={`/clubs/${c.id}`}>
+                  <motion.div whileHover={{ y: -4 }} className="glass-card rounded-2xl p-5 space-y-3 transition-shadow hover:shadow-xl cursor-pointer">
+                    <div className="text-3xl">{c.logo}</div>
+                    <h3 className="font-display font-semibold text-foreground">{c.name}</h3>
+                    <p className="text-sm text-muted-foreground">{c.description}</p>
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {c.members}</span>
+                      <span className="flex items-center gap-1"><Briefcase className="w-3 h-3" /> {c.projects} projets</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-primary text-sm font-medium">
+                      Voir le dashboard <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </motion.div>
